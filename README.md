@@ -18,7 +18,7 @@
 
 2. cmd에서 장고 개발환경 참조 : [https://wikidocs.net/70588](점프투장고)
 
-3. requirements는 ```pip install Django==4.1.5``` 을 기본으로 한다(강의 때 배운 버전)<br>
+3. requirements는 ```pip install Django==4.1.5``` 을 기본으로 한다<br>
 현 장고 버전 : pip install Django==4.1.5
 
 ### path
@@ -40,5 +40,5 @@ C:\silverScore\venvs\silverScore\Scripts\activate
 
 ---
 
-이외 추가적인 수정 사항은 추후 기재.
+
 
