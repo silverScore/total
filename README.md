@@ -11,10 +11,15 @@
 
 ## Rule
 공통적인 환경 및 규칙 정리
-link : [RULES.md](https://github.com/silverScore/total/RULES.md)
+link : [RULES.md](https://github.com/silverScore/total/blob/main/RULES.md)
 
 ## 기획서 & 분석서 요약 정리본
 detail : https://syoh5188.notion.site/2517834c93584a8196c2d5af0e44d71a
 
 ## Data 정리
 정리 후 업데이트 예정.
+
+## 통합본
+dir
+ - silverScore : latest version
+ - versions : old versions
