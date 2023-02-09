@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a@n+0+t^2-u!1r3^wpoi=09xbtd^6k_r--lwi5+2^n*l3n0h$!'
+SECRET_KEY = 'django-insecure-j3u4-=agwzdcz5fd0h3uwo=p^$_v&x2__yu4m5pg-52m8os=ln'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,15 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # add
+    'common',  # custom UserForm model
+    'care',  # templatetags
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # add
-    'care.apps.CareConfig',
-    'common.apps.CommonConfig',
+    # 'care.apps.CareConfig',
+    # 'common.apps.CommonConfig',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +67,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'care.context_processors.add_address_to_context',  # mine
             ],
+            'libraries': {
+                'custom_tags': 'care.templatetags.carefilter',  # care/templatetags/carefilter.py
+            }
         },
     },
 ]
@@ -106,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ko-kr' # 'en-us'
+LANGUAGE_CODE = 'ko-kr'  # 'en-us'
 
 TIME_ZONE = 'Asia/Seoul'  # 'UTC'
 
@@ -128,7 +134,7 @@ STATICFILES_DIRS = [
 ]
 
 # STATIC_ROOT - 추후 배포 시 runserver 를 통해서 자동으로 static files 모아주지 않음.
-STATIC_ROOT = os.path.join("staticfiles")  # "staticfiles"라는 이름으로 설정한 이유 : collectstatic 명령어를 사용하면 staticfiles폴더가 만들어지기 때문
+# STATIC_ROOT = os.path.join("staticfiles")  # "staticfiles"라는 이름으로 설정한 이유 : collectstatic 명령어를 사용하면 staticfiles폴더가 만들어지기 때문
 # python manage.py collectstatic # -> cmd 에서 배포 시에 적용 예정.
 
 
@@ -144,5 +150,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # AUTH_USER_MODEL
-AUTH_USER_MODEL = 'common.ExtendedUserForm'
+AUTH_USER_MODEL = 'common.ExtendUserForm'
 # common/models.py -> ExtendedUserForm

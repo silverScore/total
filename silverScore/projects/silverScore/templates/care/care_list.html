@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>실버스코어 - 요양원 목록</title>
+{% endblock %}
+
+{% block content %}
+<!-- S: care_list.html -->
+<section class="care_list contatiner">
+    <!-- 네비게이션바 -->
+    <div class="searcharea">
+    {% include './searchbar.html' %}
+    </div>
+    {% load carefilter %} <!-- care/templatetages/carefilter.py -->
+    <div class="listarea">
+        <!-- 요양원 목록 -->
+        {% if care_list %}
+        <h3>전국 상위의 요양원 목록</h3>
+        <ul class="center_list">
+        {% for care in care_list|slice:":20" %} <!-- 상위 20개까지 -->
+            <li><a href="#">
+                <p class="centerName"><strong>{{ care.longTermAdminNm }}</strong></p>
+                <p class="area">
+                    <strong>지역 : </strong>
+                    <span>{{ care.siDoName }}</span>
+                </p>
+                <p class="grade">
+                    <strong>등급 : </strong><span class="result">{{ care.ratingGrade }}</span>
+                    <strong>평가 : </strong>
+                    <span>{{ care.ratingCd }}</span>
+                </p>
+                <p class="img"></p>
+            </a></li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <div class="nonelist">
+            <p class="warning">요양원이 존재하지 않습니다.</p>
+        </div>
+        {% endif %}
+        <!-- filter 요양원 목록 -->
+        {% if object_list %}
+        <ul>
+            {% for res in object_list %}
+            <div class="search_res">
+                <p> 기관명 : {{ res.longTermAdminNm }} | 등급 : {{res.ratingGrade}} | 평가 : {{res.ratingCd}}</p>
+            </div>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <h3> 검색된 결과 없음</h3>
+            <p> 다른 키워드 사용해보기 </p>
+        {% endif %}
+    </div>
+</section>
+<!-- E: care_list.html -->
+{% endblock %}

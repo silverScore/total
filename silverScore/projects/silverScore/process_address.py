@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 
 # Read csv file.
-df = pd.read_csv("../silverScore/care/data/addressNumbers.csv")
+df = pd.read_csv("../silverScore/care/data/addressNumbers.csv" )
 
 # Connect to (create) database.
 database = "db.sqlite3"

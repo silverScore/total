@@ -22,7 +22,7 @@ class Care(models.Model):
     resultRating = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        ordering = ["-ratingDate"]
+        ordering = ["ratingDate","ratingGrade"]
 
     # admin에서 보이기 위함
     def __str__(self):
