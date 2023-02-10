@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'care.context_processors.add_address_to_context',  # mine
+                # 'care.context_processors.add_address_to_context',  # mine
             ],
             'libraries': {
                 'custom_tags': 'care.templatetags.carefilter',  # care/templatetags/carefilter.py

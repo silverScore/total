@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from config import settings
 
 # Create your models here.
 
@@ -29,9 +30,6 @@ class Care(models.Model):
         return f"{self.id} / 기관명 : {self.longTermAdminNm} / 기관기호 : {self.longTermAdminCd}"
 
 
-# 리뷰 - Review
-
-
 # 주소 - Address
 # projects/silverScore/care/data/addressNumbers.csv
 class Address(models.Model):
@@ -53,3 +51,27 @@ class Address(models.Model):
     # admin에서 보이기 위함 AddressInfo.object(idx) 에서
     def __str__(self):
         return f"id : {self.id} / 법정동코드 : {self.regionCd} / 지역명 : {self.regionNm}"
+
+
+# 리뷰 - Review
+User = get_user_model()
+
+class Review(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    amKind = models.SmallIntegerField(default=0)
+    faClean = models.SmallIntegerField(default=0)
+    content = models.CharField(max_length=1500, blank=True)
+    createDate = models.DateTimeField()
+    modifyDate = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+#   member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    longTermAdminCd = models.ForeignKey(Care, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-createDate']
+
+    def __str__(self):
+        return f"친절도 : {self.amKind} / 청결도 : {self.faClean} / 내용 : {self.content}"
+
+

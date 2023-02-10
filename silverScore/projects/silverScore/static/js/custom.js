@@ -18,5 +18,24 @@
 
 // JQuery ver.
 $(document).ready(function(){
+    //check page loaded
     console.log("document load!");
+    // care_detail.html detailmenu control
+    // all hide
+    $(".detailmenu li").removeClass("on");
+    $(".detailarea div").removeClass("show").css("display","none");
+    // default basic show
+    $(".detailmenu li.basic").addClass("on");
+    $(".detailarea div.basic").addClass("show").css("display","block");
+    $(".detailmenu li").on("click", function(){
+        let className = $(this).attr('class');
+        if ($(this).hasClass("disable") == false){
+            $(this).toggleClass("on");
+            $(this).siblings().removeClass("on");
+            $(`.detailarea .${className}`).addClass("show").css("display","block");
+            $(`.detailarea .${className}`).siblings().removeClass("show").css("display","none");
+            $(`.detailarea .${className}`).addClass("show").css("display","block");
+        }
+    });
 });
+

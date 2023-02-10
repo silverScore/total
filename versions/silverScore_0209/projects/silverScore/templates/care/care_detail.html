@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>실버스코어 - 요양원 상세 정보</title>
+{% endblock %}
+
+{% block content %}
+<!-- S: care_detail.html - popup -->
+{% include "form_errors.html" %}
+<h1>{{ care.longTermAdminNm }}</h1>
+<div>
+    <p>
+        <span><strong>기관명 : </strong>{{ care.longTermAdminNm }}</span>
+    </p>
+    <p></p>
+</div>
+<!-- E: care_detail.html -->
+{% endblock %}
