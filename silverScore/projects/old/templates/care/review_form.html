@@ -1,0 +1,102 @@
+{% load static %}
+<!-- S: review.html - popup_include -->
+<div class="container review">
+    <h3>해당 요양원에 대한 후기를 확인해 보세요!</h3>
+    <form action="{% url 'care_review_create' care_id=care.id %}" method="post">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <div class="mb-3 score">
+            <h6 class="amKind">분위기/친절도</h6>
+            <h6 class="faClean">시설/청결도</h6>
+        </div>
+        <div class="mb-3 star">
+            <div class="rating">
+                <div class="ratefill"></div>
+                <!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input엘리먼트에 checked 클래스 추가 -->
+                <input type="checkbox" name="amKind" id="rating11" value="1" class="rate_radio" title="1점">
+                <label for="rating11"></label>
+                <input type="checkbox" name="amKind" id="rating12" value="2" class="rate_radio" title="2점">
+                <label for="rating12"></label>
+                <input type="checkbox" name="amKind" id="rating13" value="3" class="rate_radio" title="3점" >
+                <label for="rating13"></label>
+                <input type="checkbox" name="amKind" id="rating14" value="4" class="rate_radio" title="4점">
+                <label for="rating14"></label>
+                <input type="checkbox" name="amKind" id="rating15" value="5" class="rate_radio" title="5점">
+                <label for="rating15"></label>
+            </div>
+        </div>
+        <div class="mb-3 star">
+            <div class="rating">
+                <div class="ratefill"></div>
+                <!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input엘리먼트에 checked 클래스 추가 -->
+                <input type="checkbox" name="faClean" id="rating21" value="1" class="rate_radio" title="1점">
+                <label for="rating21"></label>
+                <input type="checkbox" name="faClean" id="rating22" value="2" class="rate_radio" title="2점">
+                <label for="rating22"></label>
+                <input type="checkbox" name="faClean" id="rating23" value="3" class="rate_radio" title="3점" >
+                <label for="rating23"></label>
+                <input type="checkbox" name="faClean" id="rating24" value="4" class="rate_radio" title="4점">
+                <label for="rating24"></label>
+                <input type="checkbox" name="faClean" id="rating25" value="5" class="rate_radio" title="5점">
+                <label for="rating25"></label>
+            </div>
+        </div>
+        <div class="mb-3 contents">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" placeholder="이 리뷰는 요양기관을 찾는 분들께 큰 도움이 됩니다(최대500자)" name="content" id="content" rows="10" maxlength="500" required></textarea>
+        </div>
+        <p class="btnarea">
+            <button type="submit" class="btn btn-primary">후기 올리기</button>
+        </p>
+    </form>
+</div>
+<script type="text/javascript">
+//별점 마킹 모듈 프로토타입으로 생성
+function Rating(){};
+Rating.prototype.rate = 0;
+Rating.prototype.setRate = function(rateobj, newrate){
+    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+    this.rate = newrate;
+	let checks = null;
+	//요소가 파라메터로 넘어오면 별점 클릭, 없으면 저장 후 전체 초기화
+	if(rateobj){
+		rateobj.querySelector('.ratefill').style.width = parseInt(newrate * 60) + 'px'; // 현재 별점 갯수 채색
+		checks = rateobj.querySelectorAll('.rate_radio'); // 넘어온 요소 하위의 라디오버튼만 선택
+	}else{
+		//전체 별점 채색 초기화
+		const rateFills = document.querySelectorAll('.ratefill');
+		rateFills.forEach(function(item){
+			item.style.width = parseInt(newrate * 60) + 'px';
+		});
+		//전체 라디오 버튼 초기화
+		checks = document.querySelectorAll('.rate_radio');
+	}
+	//별점 체크 라디오 버튼 처리
+	if(checks){
+		checks.forEach(function(item, idx){
+			if(idx < newrate){
+				item.checked = true;
+			}else{
+				item.checked = false;
+			}
+		});
+	}
+}
+
+let rating = new Rating();//별점 인스턴스 생성
+
+document.addEventListener('DOMContentLoaded', function(){
+    //별점선택 이벤트 리스너
+    const rateForms = document.querySelectorAll('.rating'); /* 별점 선택 템플릿을 모두 선택 */
+	rateForms.forEach(function(item){//클릭 이벤트 리스너 각각 등록
+		item.addEventListener('click',function(e){
+			let elem = e.target;
+			if(elem.classList.contains('rate_radio')){
+				rating.setRate(elem.parentElement, parseInt(elem.value)); // setRate() 에 ".rating" 요소를 첫 번째 파라메터로 넘김
+			}
+		})
+	});
+});
+
+</script>
+<!-- E: review.html - popup_include -->

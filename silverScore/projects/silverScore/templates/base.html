@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="{% static 'icon/silverScore_favicon.png' %}" type="image/x-icon">
+        <link rel="shortcut icon" href="{% static 'img/icon/silverScore_favicon.png' %}" type="image/x-icon">
         <!-- google web font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,18 +34,26 @@
     {% block content %}
     {% endblock %}
     <!-- 기본 템플릿 안에 삽입될 내용 End -->
-    <footer class="footer">
-        <h1><img src="{% static 'img/silverScore_logo.png' %}" alt="실버스코어 로고"></h1>
-        <ul class="info">
-            <li><strong>회사명 :</strong>(주)실버 스코어</li>
-            <li><strong>서비스 문의 :</strong>admin@silverscore.com</li>
-        </ul>
-        <p class="rights">
-            <a href="#">이용약관</a>
-            <a href="#">개인정보처리방침</a>
-            <a href="#">회사소개</a>
-        </p>
-        <p class="copyright">Copyright @ SilverScore Since 2022</p>
+    <footer class="footer bg-light">
+        <div class="rows">
+            <ul class="info">
+                <li><strong>회사명 :</strong>(주)실버 스코어</li>
+                <li><strong>서비스 문의 :</strong><a href="mailto:admin@silverscore.com" class="mailto">admin@silverscore.com</a></li>
+            </ul>
+            <ul class="rights">
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">회사소개</a></li>
+            </ul>
+            <ul class="links">
+                <li><a class="btn btn-outline-light btn-floating m-1" href="https://github.com/silverScore/total" target="_blank" role="button"><img src="{% static 'img/icons/github-mark.png' %}" alt="gitHub linke"></a></li>
+                <li><a href="#" target="_blank"><a class="btn btn-outline-light btn-floating m-1" href="mailto:admin@silverScore.com" target="_blank" role="button"><img src="{% static 'img/icons/email.png' %}" alt="mail"></a></li>
+            </ul>
+        </div>
+        <div class="rows">
+            <h1 class="logo"><img src="{% static 'img/silverScore_logo.png' %}" alt="실버스코어 로고"></h1>
+            <p class="copyright">Copyright @ SilverScore Since 2022</p>
+        </div>
     </footer>
     </body>
 </html>

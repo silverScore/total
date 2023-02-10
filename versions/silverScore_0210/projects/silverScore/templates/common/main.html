@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}
+메인페이지 - 실버스코어
+{% endblock %}
+
+{% block content %}
+<!-- S: main.html -->
+{% load static %}
+<section class="main">
+    <div class="container slider">
+        <div class="box">
+            <p class="text">
+                <span class="line">실버 스코어에서</span>
+                <span class="line">노인을 위한 요양기관에 대한 정보를 제공합니다.</span>
+            </p>
+            <p class="image"><img src="{% static 'img/003.jpg' %}" alt=""></p>
+        </div>
+        <div class="box">
+            <p class="text">
+                <span class="line">요양기관을 검색해 보세요.</span>
+                <span class="line">원하시는 곳을 찾아드립니다.</span>
+            </p>
+            <p class="image"><img src="{% static 'img/005.jpg' %}" alt=""></p>
+        </div>
+    </div>
+</section>
+<!-- main page slider -->
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.slider').bxSlider({
+        mode: 'fade',
+        auto: true,
+        autoControls: true,
+        stopAutoOnClick: true,
+        pager: true,
+      });
+    });
+  </script>
+<!-- E: main.html -->
+{% endblock %}

@@ -138,8 +138,12 @@
             </dl>
         </div>
         <div class="review">
-            <h3>후기</h3>
-            {% include './review.html' %}
+            <h3>{{ object.longTermAdminNm }} 의 후기/리뷰를 확인해보세요.</h3>
+            {% load care_template %} <!-- care/templatetages/care_template.py -->
+            {% if user.is_authenticated %}
+            {% include './review_list.html' %}
+            {% endif %}
+            {% include './review_form.html' %}
         </div>
     </div>
 </section>

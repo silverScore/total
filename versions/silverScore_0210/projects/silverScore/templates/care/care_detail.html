@@ -1,0 +1,168 @@
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'icon/silverScore_favicon.png' %}" type="image/x-icon">
+    <!-- google web font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <!-- jquery-3.6.3.min.js -->
+    <!-- <script type="text/javascript" src="{% static 'js/jquery-3.6.3.min.js' %}"></script> -->
+    <!-- bxslider.com -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <!-- bootstrap.min.js -->
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- custom.js -->
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <title>실버스코어 - 요양원 상세 정보</title>
+</head>
+<!-- S: care_detail.html - popup -->
+{% include "form_errors.html" %}
+<section class="care_detail">
+    <h1>{{ object.longTermAdminNm }}</h1>
+    <ul class="data_update">
+        <li class="date">업데이트 날짜 : 2023-02-01</li>
+        <li class="origin">자료 출처 : 공공데이터 포탈 및 국민건강보험공단</li>
+    </ul>
+    <ul class="detailmenu">
+        <li class="basic"><a href="#">기본 정보</a></li>
+        <li class="rating"><a href="#">평가 정보</a></li>
+        <li class="map"><a href="#">지도 정보</a></li>
+        <li class="facility"><a href="#">시설현황</a></li>
+        <li class="program disable"><a href="#">프로그램운영</a></li>
+        <li class="photo disable"><a href="#">사진</a></li>
+        <li class="notice"><a href="#">공지사항</a></li>
+        <li class="review"><a href="#">후기</a></li>
+    </ul>
+    <div class="detailarea">
+        <div class="basic">
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <th>기관명</th>
+                        <th>급여종류</th>
+                    </tr>
+                    <tr>
+                        <td>{{ object.longTermAdminNm }}</td>
+                        <td>{{ object.adminPttnName }}</td>
+                    </tr>
+                    <tr>
+                        <th>관할시도명</th>
+                        <td>{{ object.siDoName }}</td>
+                    </tr>
+                    <tr>
+                        <th>평가구분</th>
+                        <td>{{ object.ratingCd }}</td>
+                    </tr>
+                    <tr>
+                        <th>평가일자</th>
+                        <td>{{ object.ratingDate }}</td>
+                    </tr>
+                    <tr>
+                        <th>평가등급</th>
+                        <td class="grade">{{ object.ratingGrade }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="rating">
+            <table class="detail_table">
+                <thead>
+                    <tr>
+                        <th>기관운영</th>
+                        <th>환경및안전</th>
+                        <th>수급자권리보장</th>
+                        <th>급여제공과정</th>
+                        <th>급여제공결과</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ object.opRating }}</td>
+                        <td>{{ object.safeRating }}</td>
+                        <td>{{ object.rightRating }}</td>
+                        <td>{{ object.processRating }}</td>
+                        <td>{{ object.resultRating }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="map">
+            <div class="maparea">
+                map 예정
+            </div>
+        </div>
+        <div class="facility">
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <td>시설 현황</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="program">
+            <table class="detail_table">
+                <tbody>
+                    <tr>
+                        <td>프로그램운영</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="photo">
+            <div class="slider">
+                <div>
+                    <img src="{% static 'img/003.png' %}" alt="{{ object.longTermAdminNm }}">
+                </div>
+            </div>
+        </div>
+        <div class="notice">
+            <dl>
+                <dt>공지사항</dt>
+                <dd>
+                    <ul>
+                        <li>내용1</li>
+                        <li>내용2</li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+        <div class="review">
+            <h3>후기</h3>
+            {% include './review.html' %}
+        </div>
+    </div>
+</section>
+<!-- 해당 제이쿼리는 관리를 위해 static/js/custom.js로 이동 -->
+<script type="text/javascript">
+// 해당 제이쿼리는 관리를 위해 static/js/custom.js로 이동
+// $(document).ready(function(){
+    // all hide
+    // $(".detailmenu li").removeClass("on");
+    // $(".detailarea div").removeClass("show").css("display","none");
+    // default basic show
+    // $(".detailmenu li.basic").addClass("on");
+    // $(".detailarea div.basic").addClass("show").css("display","block");
+    // $(".detailmenu li").on("click", function(){
+        // let className = $(this).attr('class');
+        // if ($(this).hasClass("disable") == false){
+            // $(this).toggleClass("on");
+            // $(this).siblings().removeClass("on");
+            // $(`.detailarea .${className}`).addClass("show").css("display","block");
+            // $(`.detailarea .${className}`).siblings().removeClass("show").css("display","none");
+            // $(`.detailarea .${className}`).addClass("show").css("display","block");
+        // }
+    // });
+// });
+</script>
+<!-- E: care_detail.html -->

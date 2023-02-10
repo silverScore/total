@@ -10,15 +10,13 @@
     <div class="searcharea">
     {% include './searchbar.html' %}
     </div>
-    {% load carefilter %} <!-- care/templatetages/carefilter.py -->
+    {% load care_template %} <!-- care/templatetages/care_template.py -->
     <div class="listarea">
         <h3>요양원 목록</h3>
         {% if care_list %}
         <ul class="center_list">
             {% for care in care_list %}
             <li>
-                {% comment %} <a href="{% url 'care:care_detail' care.id %}"> {% endcomment %}
-                <!-- window.open('url 'care:care_detail' care.id ', 'popup', 'width=800, height=600'); -->
                 <a href="#" onclick="window.open('{% url 'care:care_detail' care.id %}', 'popup', 'width=1000, height=600, top=' + ((screen.height - 600) / 2) / 2 + ', left=' + (screen.width - 1000) / 2 + ', scrollbars=yes'); return false;">
                 <p class="centerName"><strong>{{ care.longTermAdminNm }}</strong></p>
                 <p class="area">
@@ -39,17 +37,17 @@
         <div class="pagearea">
             <ul class="pagination justify-content-center">
                 <!-- 처음페이지 -->
-                <li class="page-item">
-                    <a href="?page={{ 1 }}" class="page-link">처음</a>
+                <li class="page-item arr">
+                    <a href="?page={{ 1 }}" class="page-link arr"><<</a>
                 </li>
                 <!-- 이전페이지 -->
                 {% if care_list.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ care_list.previous_page_number }}">이전</a>
+                    <a class="page-link arr" href="?page={{ care_list.previous_page_number }}"><</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                    <a class="page-link arr" tabindex="-1" aria-disabled="true" href="#"><</a>
                 </li>
                 {% endif %}
                 <!-- 페이지리스트 -->
@@ -69,16 +67,16 @@
                 <!-- 다음페이지 -->
                 {% if question_list.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
+                    <a class="page-link arr" href="?page={{ question_list.next_page_number }}">></a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>  <!-- tabindex="-1" 인 거 보면 그 전 부분인 듯. -->
+                    <a class="page-link arr" tabindex="-1" aria-disabled="true" href="#">></a>  <!-- tabindex="-1" 인 거 보면 그 전 부분인 듯. -->
                 </li>
                 {% endif %}
                 <!-- 마지막페이지 -->
-                <li class="page-item">
-                    <a href="?page={{ care_list.paginator.num_pages }}" class="page-link">마지막</a>
+                <li class="page-item arr">
+                    <a href="?page={{ care_list.paginator.num_pages }}" class="page-link arr">>></a>
                 </li>
             </ul>
         </div>

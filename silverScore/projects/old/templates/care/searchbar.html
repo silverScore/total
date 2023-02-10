@@ -1,0 +1,49 @@
+{% load static %}
+<!-- S: searchbar -->
+<div class="searchBar">
+    <div class="keyword">
+        <h3>원하시는 키워드로 검색해보세요.</h3>
+        <form action="{% url 'care:care_index' %}" method="get">
+            <input type="text" name="search_input" placeholder="검색할 내용을 입력하세요" value="{{ request.GET.search_input }}">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+    {% comment %} <div class="selectType">
+        <h3>찾으시는 요양시설을 선택해 주세요.</h3>
+        <ul>
+            <li><a href="#">요양병원</a></li>
+            <li><a href="#">요양원</a></li>
+            <li><a href="#">주야간보호</a></li>
+            <li><a href="#">방문시설</a></li>
+        </ul>
+    </div>
+    <div class="filter">
+        <h3>등급 등 원하는 조건이 있나요?</h3>
+        <p class="btnarea">
+            <button class="filterbtn"><img src="{% static "icons/png/002-filter.png" %}" alt="조건 필터"></button>
+            <span>버튼을 눌러주세요!</span>
+        </p>
+    </div> {% endcomment %}
+    <div class="area">
+        <h3>원하시는 지역을 선택해주세요.</h3>
+        {% load carefilter %}
+        <div class="region container my-3">
+            <!-- basic list -->
+            {% if siDo_info %}
+            <ul class="regionList">
+                {% regroup siDo_info by siDoNm as address_list %}
+                {% for siDoNm in address_list %}
+                <li class="siDo"><a href="{% url 'care:care_index' %}?siDoName={{ siDoNm.grouper }}">{{ siDoNm.grouper }}</a></li><!--|default_if_none:''-->
+                {% regroup siDoNm.list by siGunGuNm as siGungu_list %}
+                <ul class="siGunGuList">
+                    {% for gunGu in siGungu_list %}
+                    <li><a href="{% url 'care:care_index' %}?siDoName={{ siDoNm.grouper }}&siGunGuName={{ gunGu.grouper }}">{{ gunGu.grouper }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- E: searchbar -->
