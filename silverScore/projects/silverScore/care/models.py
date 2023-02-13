@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from config import settings
 
 # Create your models here.
@@ -23,7 +23,7 @@ class Care(models.Model):
     resultRating = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        ordering = ["ratingDate","ratingGrade"]
+        ordering = ["ratingDate","ratingGrade","id"]
 
     # admin에서 보이기 위함
     def __str__(self):
@@ -54,24 +54,23 @@ class Address(models.Model):
 
 
 # 리뷰 - Review
-User = get_user_model()
+# User = get_user_model()
 
 class Review(models.Model):
     id = models.BigAutoField(primary_key=True)
     amKind = models.SmallIntegerField(default=0)
     faClean = models.SmallIntegerField(default=0)
     content = models.CharField(max_length=1500, blank=True)
-    createDate = models.DateTimeField()
+    createDate = models.DateTimeField(auto_now=True, null=True, blank=True)
     modifyDate = models.DateTimeField(auto_now=True, null=True, blank=True)
 
-# member = models.ForeignKey(Member, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    longTermAdminCd = models.ForeignKey(Care, on_delete=models.CASCADE)
+    # care = models.ForeignKey(Care.id, on_delete=models.CASCADE, related_name='reviews', default=1)
+    care = models.ForeignKey(Care, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['-createDate']
+        ordering = ['id']# ['-createDate']
 
     def __str__(self):
-        return f"친절도 : {self.amKind} / 청결도 : {self.faClean} / 내용 : {self.content}"
-
+        return f"review id : {self.id} / care id : {self.care} / 친절도 : {self.amKind} / 청결도 : {self.faClean} / 내용 : {self.content}"
 

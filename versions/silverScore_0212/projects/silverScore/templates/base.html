@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{% static 'img/icon/silverScore_favicon.png' %}" type="image/x-icon">
+        <!-- google web font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- custom CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <!-- jquery-3.6.3.min.js -->
+        <!-- <script type="text/javascript" src="{% static 'js/jquery-3.6.3.min.js' %}"></script> -->
+        <!-- bxslider.com -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+        <!-- bootstrap.min.js -->
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- custom.js -->
+        <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+        <title>실버스코어</title>
+    </head>
+    <body>
+    <!-- 네비게이션바 -->
+    {% include "navbar.html" %}
+    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+    {% block content %}
+    {% endblock %}
+    <!-- 기본 템플릿 안에 삽입될 내용 End -->
+    <footer class="footer bg-light">
+        <div class="rows">
+            <ul class="info">
+                <li><strong>회사명 :</strong>(주)실버 스코어</li>
+                <li><strong>서비스 문의 :</strong><a href="mailto:admin@silverscore.com" class="mailto">admin@silverscore.com</a></li>
+            </ul>
+            <ul class="rights">
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">회사소개</a></li>
+            </ul>
+            <ul class="links">
+                <li><a class="btn btn-outline-light btn-floating m-1" href="https://github.com/silverScore/total" target="_blank" role="button"><img src="{% static 'img/icons/github-mark.png' %}" alt="gitHub linke"></a></li>
+                <li><a href="#" target="_blank"><a class="btn btn-outline-light btn-floating m-1" href="mailto:admin@silverScore.com" target="_blank" role="button"><img src="{% static 'img/icons/email.png' %}" alt="mail"></a></li>
+            </ul>
+        </div>
+        <div class="rows">
+            <h1 class="logo"><img src="{% static 'img/silverScore_logo.png' %}" alt="실버스코어 로고"></h1>
+            <p class="copyright">Copyright @ SilverScore Since 2022</p>
+        </div>
+    </footer>
+    </body>
+</html>

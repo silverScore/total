@@ -22,8 +22,12 @@ from common import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.IndexView.as_view(), name='index'),  # '/' 에 해당되는 path
-    path('common/', include(('common.urls', 'common'))),
+    # path('', views.IndexView.as_view(), name='index'),  # '/' 에 해당되는 path
+    # path('common/', include(('common.urls', 'common'))),
+    # path('common/', include('django.contrib.auth.urls')),
+    # path('care/', include('care.urls')), # 요양원&리뷰
+    path('', include(('common.urls', 'common'))),
     path('common/', include('django.contrib.auth.urls')),
     path('care/', include('care.urls')), # 요양원&리뷰
+    path('care/', include('django.contrib.auth.urls')),
 ]

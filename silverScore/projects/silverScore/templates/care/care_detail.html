@@ -1,4 +1,6 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +21,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <!-- bootstrap.min.js -->
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% comment %} <!-- bootstrap.min.js -->
+    <!-- <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> --> {% endcomment %}
     <!-- custom.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
     <title>실버스코어 - 요양원 상세 정보</title>
 </head>
+<body>
 <!-- S: care_detail.html - popup -->
 {% include "form_errors.html" %}
 <section class="care_detail">
@@ -36,12 +40,12 @@
     <ul class="detailmenu">
         <li class="basic"><a href="#">기본 정보</a></li>
         <li class="rating"><a href="#">평가 정보</a></li>
-        <li class="map"><a href="#">지도 정보</a></li>
+        <li class="map disable"><a href="#">지도 정보</a></li>
         <li class="facility"><a href="#">시설현황</a></li>
         <li class="program disable"><a href="#">프로그램운영</a></li>
         <li class="photo disable"><a href="#">사진</a></li>
         <li class="notice"><a href="#">공지사항</a></li>
-        <li class="review"><a href="#">후기</a></li>
+        <li class="review"><a href="#" onclick="loadReviews({{ care.id }})">후기</a></li>
     </ul>
     <div class="detailarea">
         <div class="basic">
@@ -137,18 +141,25 @@
                 </dd>
             </dl>
         </div>
-        <div class="review">
-            <h3>{{ object.longTermAdminNm }} 의 후기/리뷰를 확인해보세요.</h3>
+        <div class="review" id ="review">
+            <h4 class="mb-3 text-center">{{ object.longTermAdminNm }}의 후기/리뷰를 확인해보세요.</h4>
             {% load care_template %} <!-- care/templatetages/care_template.py -->
+            {% comment %} {% include 'care/review_list.html' with reviews=care.reviews.all %} {% endcomment %}
+            {% comment %} {% include 'care/review_list.html' with reviews=care.reviews.all id=object.id  %} {% endcomment %}
+            {% include 'care/review_list.html' with review_list=review_list %}
             {% if user.is_authenticated %}
-            {% include './review_list.html' %}
-            {% endif %}
             {% include './review_form.html' %}
+            {% endif %}
         </div>
     </div>
 </section>
-<!-- 해당 제이쿼리는 관리를 위해 static/js/custom.js로 이동 -->
 <script type="text/javascript">
+    function loadReviews(careId) {  // 후기 click 시 render
+        var url = '/care/' + careId + '/reviews/';
+        $.get(url, function(data) {
+        $('#review').html(data);
+        });
+    }
 // 해당 제이쿼리는 관리를 위해 static/js/custom.js로 이동
 // $(document).ready(function(){
     // all hide
@@ -170,3 +181,5 @@
 // });
 </script>
 <!-- E: care_detail.html -->
+</body>
+</html>

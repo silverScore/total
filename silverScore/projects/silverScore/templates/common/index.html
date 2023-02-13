@@ -8,19 +8,31 @@
 {% load static %}
 <section class="main container">
     <div class="container slider">
-        <div class="box">
+        <div class="box" href="{% url 'care:care_index' %}">
             <p class="text">
-                <span class="line">실버 스코어에서</span>
-                <span class="line">노인을 위한 요양기관에 대한 정보를 제공합니다.</span>
+                <a href="{% url 'care:care_index' %}" target="_self">
+                    <span class="line">실버 스코어에서</span>
+                    <span class="line">노인을 위한 요양기관에 대한 정보를 제공합니다.</span>
+                </a>
             </p>
-            <p class="image"><img src="{% static 'img/003.jpg' %}" alt=""></p>
+            <p class="image">
+                <a href="{% url 'care:care_index' %}" target="_self">
+                    <img src="{% static 'img/003.jpg' %}" alt="">
+                </a>
+            </p>
         </div>
-        <div class="box">
+        <div class="box" href="{% url 'care:care_index' %}">
             <p class="text">
-                <span class="line">요양기관을 검색해 보세요.</span>
-                <span class="line">원하시는 곳을 찾아드립니다.</span>
+                <a href="{% url 'care:care_index' %}" target="_self">
+                    <span class="line">요양기관을 검색해 보세요.</span>
+                    <span class="line">원하시는 곳을 찾아드립니다.</span>
+                </a>
             </p>
-            <p class="image"><img src="{% static 'img/005.jpg' %}" alt=""></p>
+            <p class="image">
+                <a href="{% url 'care:care_index' %}" target="_self">
+                    <img src="{% static 'img/005.jpg' %}" alt="">
+                </a>
+            </p>
         </div>
     </div>
 </section>

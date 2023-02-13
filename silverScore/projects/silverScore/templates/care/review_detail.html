@@ -1,1 +1,162 @@
 {% load care_template %} <!-- care/templatetages/care_template.py -->
+<div class="container">
+    <!--message 표시-->
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+        {% for message in messages %}
+            <strong>{{ message.tags }}</strong>
+            <ul><li>{{ message.message }}</li></ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!--리뷰-->
+
+    <h3 class="my-3 border-bottom py-2 text-danger">{{ longtermadmin.adminNm }} 후기 내용</h3>
+
+    <!--
+    <h3 class="border-bottom py-2 text-danger">후기 내용</h3>
+    -->
+    <div class="row">
+        <h6 class="col">분위기/친절도</h6>
+        <h6 class="col">시설/청결도</h6>
+    </div>
+    <div class="mb-3 row">
+        <div class="col">
+            <div class="rating">
+                <div class="ratefill" id="ratefill1"></div>
+                <!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input엘리먼트에 checked 클래스 추가 -->
+                <input type="checkbox" name="amKind" id="rating11" value="1" class="rate_radio" title="1점" disabled>
+                <label for="rating11"></label>
+                <input type="checkbox" name="amKind" id="rating12" value="2" class="rate_radio" title="2점" disabled>
+                <label for="rating12"></label>
+                <input type="checkbox" name="amKind" id="rating13" value="3" class="rate_radio" title="3점" disabled>
+                <label for="rating13"></label>
+                <input type="checkbox" name="amKind" id="rating14" value="4" class="rate_radio" title="4점" disabled>
+                <label for="rating14"></label>
+                <input type="checkbox" name="amKind" id="rating15" value="5" class="rate_radio" title="5점" disabled >
+                <label for="rating15"></label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="rating">
+                <div class="ratefill" id="ratefill2"></div>
+                <!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input엘리먼트에 checked 클래스 추가 -->
+                <input type="checkbox" name="faClean" id="rating21" value="1" class="rate_radio" title="1점" disabled>
+                <label for="rating21"></label>
+                <input type="checkbox" name="faClean" id="rating22" value="2" class="rate_radio" title="2점" disabled>
+                <label for="rating22"></label>
+                <input type="checkbox" name="faClean" id="rating23" value="3" class="rate_radio" title="3점" disabled>
+                <label for="rating23"></label>
+                <input type="checkbox" name="faClean" id="rating24" value="4" class="rate_radio" title="4점" disabled>
+                <label for="rating24"></label>
+                <input type="checkbox" name="faClean" id="rating25" value="5" class="rate_radio" title="5점" disabled>
+                <label for="rating25"></label>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        <div class="mb-3">
+        <label for="content" class="form-label">내용</label>
+        <textarea class="form-control"
+                  name="content" id="content" rows="10" maxlength="500" disabled>{{ review.content }}</textarea>
+    </div>
+    </form>
+
+    <!--
+    <div class="mb-3">
+        <div class="form-label">내용</div>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;">{{ review.content }}</div>
+                <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2"><strong>{{ review.user.username }}</strong></div>
+                    <div><i class="fas fa-clock"></i> {{ review.createDate }}</div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    -->
+    <div class="my-3">
+        <a href="{% url 'member:review_index' longtermadmin.id %}" class="back_to_list btn btn-secondary">
+            <i class="fas fa-list"></i> 목록으로 </a>
+
+        {% if request.user == review.user %}
+            <a href="{% url 'member:review_modify' review.id %}"
+               class="btn btn-primary">후기 수정</a>
+            <a href="javascript:void(0)" class="delete btn btn-primary"
+               data-uri="{% url 'member:review_delete' review.id %}">후기 삭제</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}k
+{% block script %}
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+//별점 마킹 모듈 프로토타입으로 생성
+function Rating(){};
+Rating.prototype.rate = 0;
+Rating.prototype.setRate = function(rateobj, newrate){
+    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+    this.rate = newrate;
+	let checks = null;
+	//요소가 파라메터로 넘어오면 별점 클릭, 없으면 저장 후 전체 초기화
+	if(rateobj){
+		rateobj.querySelector('.ratefill').style.width = parseInt(newrate * 60) + 'px'; // 현재 별점 갯수 채색
+		checks = rateobj.querySelectorAll('.rate_radio'); // 넘어온 요소 하위의 라디오버튼만 선택
+	}else{
+		//전체 별점 채색 초기화
+		const rateFills = document.querySelectorAll('.ratefill');
+		rateFills.forEach(function(item){
+			item.style.width = parseInt(newrate * 60) + 'px';
+		});
+		//전체 라디오 버튼 초기화
+		checks = document.querySelectorAll('.rate_radio');
+	}
+	//별점 체크 라디오 버튼 처리
+	if(checks){
+		checks.forEach(function(item, idx){
+			if(idx < newrate){
+				item.checked = true;
+			}else{
+				item.checked = false;
+			}
+		});
+	}
+}
+
+let rating = new Rating();//별점 인스턴스 생성
+
+document.addEventListener('DOMContentLoaded', function(){
+    //별점선택 이벤트 리스너
+    const rateForms = document.querySelectorAll('.rating'); // 별점 선택 템플릿을 모두 선택
+	rateForms.forEach(function(item){//클릭 이벤트 리스너 각각 등록
+		item.addEventListener('click',function(e){
+			let elem = e.target;
+			if(elem.classList.contains('rate_radio')){
+                rating.setRate(elem.parentElement, parseInt(elem.value)); // setRate() 에 ".rating" 요소를 첫 번째 파라메터로 넘김
+			}
+		})
+	});
+});
+
+// Assuming review.amKind is the variable that stores the review score from the Django model
+var review_amKind = {{ review.amKind }};
+var review_faClean = {{ review.faClean }};
+var amKind_width = review_amKind * 60;
+var faClean_width = review_faClean * 60;
+
+// Set the width of the .ratefill element
+document.getElementById("ratefill1").style.width = amKind_width + "px";
+document.getElementById("ratefill2").style.width = faClean_width + "px";
+</script>

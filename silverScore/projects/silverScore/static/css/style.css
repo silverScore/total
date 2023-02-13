@@ -174,6 +174,11 @@ section > div {
 .container .box p {
     margin: 0
 }
+.container .box p a {
+    position: relative;
+    display: block;
+    z-index: 60;
+}
 .container .box .text {
     float: left;
     min-width: 300px;
@@ -328,11 +333,11 @@ div.searchBar {
     position: relative;
     width: 115px;
 }
-.regionList .siDo .siGunGuList {
+/* .regionList .siGunGuList {
     position: absolute;
     left: 120px;
     top: 0;
-}
+} */
 
 /* detailarea.html - popup */
 section.care_detail {

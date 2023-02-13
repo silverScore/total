@@ -56,11 +56,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], # templates
         'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                ], # [BASE_DIR / 'templates'], # templates
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -124,7 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 # STATIC_URL = 'static/'
-import os
 
 # STATIC FILES
 STATIC_URL = 'static/'
@@ -142,8 +143,14 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# 로그인 유도
+LOGIN_URL = '/common/login/'  # registraion 에 넣지만 LOGIN 하는 경로는 얘로 잡음.
+
 # 로그인 성공후 이동하는 URL
-LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
+from django.urls import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('common:main')
+
 
 # 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
