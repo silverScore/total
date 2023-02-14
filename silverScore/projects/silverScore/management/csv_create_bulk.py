@@ -1,5 +1,6 @@
 import csv
 from care.models import Care, Address
+# addressNumbers.csv 의 column인 header는 삭제처리 할 것.
 hand = open('C:/silverScore/projects/silverScore/care/data/addressNumbers.csv')
 reader = csv.reader(hand)
 bulk_list = []

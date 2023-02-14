@@ -16,10 +16,19 @@ link : [RULES.md](https://github.com/silverScore/total/blob/main/RULES.md)
 ## 기획서 & 분석서 요약 정리본
 detail : https://syoh5188.notion.site/2517834c93584a8196c2d5af0e44d71a
 
-## Data 정리
+## 개인적인 회고들
+detail : https://syoh5188.notion.site/4027129d800a4f1da2ca4ce3250ab9f0
+
+## Data 전처리 관련
 정리 후 업데이트 예정.
 
 ## 통합본
 dir
  - silverScore : latest version
+    - projects : 실제 프로젝트 코드
+        - rawdata : raw데이터 및 전처리 한 데이터
+        - silverScore : Django project
+        - total.ipynb : rawdata에서 처리한 코드 설명 곁들인 주피터 파일
+    - venvs : 프로젝트 가상환경
  - versions : old versions
+ - presentation : 발표자료
