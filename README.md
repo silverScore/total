@@ -20,15 +20,15 @@ detail : https://syoh5188.notion.site/2517834c93584a8196c2d5af0e44d71a
 detail : https://syoh5188.notion.site/4027129d800a4f1da2ca4ce3250ab9f0
 
 ## Data 전처리 관련
-정리 후 업데이트 예정.
+rawdata 처리한 ipynb : https://github.com/silverScore/total/blob/main/silverScore/projects/total.ipynb
 
 ## 통합본
 dir
- - silverScore : latest version
-    - projects : 실제 프로젝트 코드
-        - rawdata : raw데이터 및 전처리 한 데이터
-        - silverScore : Django project
+ - silverScore/ : latest version
+    - projects/ : 실제 프로젝트 코드
+        - rawdata/ : raw데이터 및 전처리 한 데이터
+        - silverScore/ : Django project
         - total.ipynb : rawdata에서 처리한 코드 설명 곁들인 주피터 파일
-    - venvs : 프로젝트 가상환경
- - versions : old versions
- - presentation : 발표자료
+    - venvs/ : 프로젝트 가상환경
+ - versions/ : old versions
+ - presentation/ : 발표자료
